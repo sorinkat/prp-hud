@@ -55,6 +55,10 @@ class CharacterController extends Controller
     {
         $name = urldecode($name);
         $result = Character::where('hudid', $id)->where('name',$name)->delete();
-        return response($result, 200);
+        if($result) {
+            return response("Deleated", 200);
+        } else {
+            return response("Delete Failure", 500);
+        }
     }   
 }
