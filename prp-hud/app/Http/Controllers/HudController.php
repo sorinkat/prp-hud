@@ -32,7 +32,7 @@ class HudController extends Controller
 
     public function create(Request $request)
     {
-        $result = json_decode($request->getContent(), true);
+        $result = json_decode($request->getContent());
         $hud = Hud::find($result->id)->first();
         if(empty($hud)) {
             $hud = Hud::create($request->all());
