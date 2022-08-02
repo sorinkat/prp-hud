@@ -42,7 +42,7 @@ class HudController extends Controller
     {
         try {
             $result = json_decode($request->getContent());
-            $hud = Hud::find($result->id)->first();
+            $hud = Hud::find($result->id);
             if(empty($hud)) {
                 $hud = Hud::create($request->all());
             }
