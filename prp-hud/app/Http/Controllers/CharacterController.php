@@ -53,6 +53,7 @@ class CharacterController extends Controller
 
     public function delete($id, $name)
     {
+        $name = urldecode($name);
         Character::where('hudid', $id)->where('name',$name)->delete();
         return response('Deleted Successfully', 200);
     }   
