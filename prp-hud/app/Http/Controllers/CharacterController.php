@@ -10,7 +10,7 @@ class CharacterController extends Controller
 
     public function getCharacters($id)
     {
-        $characters = Character::where('hudid', $id)->all();
+        $characters = Character::where('hudid', $id)->get();
         if(!empty($characters))
         {
             return response()->json($characters, 201);
