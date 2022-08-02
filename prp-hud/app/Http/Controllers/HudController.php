@@ -10,7 +10,7 @@ class HudController extends Controller
     public function getHuds()
     {
         $huds = Hud::all();
-        if(!empty($huds))
+        if(!empty($huds) && count($huds)>0)
         {
             return response()->json($huds, 201);
         }
