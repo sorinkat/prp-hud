@@ -9,48 +9,68 @@ class HudController extends Controller
 {
     public function getHuds()
     {
-        $huds = Hud::all();
-        if(!$huds->isEmpty())
-        {
-            return response()->json($huds, 201);
-        }
+        try {
+            $huds = Hud::all();
+            if(!$huds->isEmpty())
+            {
+                return response()->json($huds, 201);
+            }
 
-        return response('No Huds', 403);        
+            return response('No Huds', 403);    
+        } catch(\Throwable $e) {
+            return response()->json($e, 500);                
+        }            
     }
 
     public function getHudData($id)
     {
-        $hud = Hud::find($id);
-        if(!empty($hud) && $hud->active == 1) {
-            return response()->json($hud, 201);
-        }
-        elseif(!empty($hud) && $hud->active != 1) {
-            return response('Hud Disabled', 403);
-        }
-        return response('Hud Does not exist', 403);
+        try {
+            $hud = Hud::find($id);
+            if(!empty($hud) && $hud->active == 1) {
+                return response()->json($hud, 201);
+            }
+            elseif(!empty($hud) && $hud->active != 1) {
+                return response('Hud Disabled', 403);
+            }
+            return response('Hud Does not exist', 403);
+        } catch(\Throwable $e) {
+            return response()->json($e, 500);                
+        }        
     }
 
     public function create(Request $request)
     {
-        $result = json_decode($request->getContent());
-        $hud = Hud::find($result->id)->first();
-        if(empty($hud)) {
-            $hud = Hud::create($request->all());
+        try {
+            $result = json_decode($request->getContent());
+            $hud = Hud::find($result->id)->first();
+            if(empty($hud)) {
+                $hud = Hud::create($request->all());
+            }
+            return response()->json($hud, 201);
+        } catch(\Throwable $e) {
+            return response()->json($e, 500);                
         }
-        return response()->json($hud, 201);
     }
 
     public function update($id, Request $request)
     {
-        $hud = Hud::findOrFail($id);
-        $hud->update($request->all());
+        try {
+            $hud = Hud::findOrFail($id);
+            $hud->update($request->all());
 
-        return response()->json($hud, 200);
+            return response()->json($hud, 200);
+        } catch(\Throwable $e) {
+            return response()->json($e, 500);                
+        }        
     }
 
     public function delete($id)
     {
-        Hud::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        try {
+            Hud::findOrFail($id)->delete();
+            return response('Deleted Successfully', 200);
+        } catch(\Throwable $e) {
+            return response()->json($e, 500);                
+        }        
     }    
 }
