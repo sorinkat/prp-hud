@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class HudController extends Controller
 {
+    public function getHuds()
+    {
+        $huds = Hud::all();
+        if(!empty($huds))
+        {
+            return response()->json($huds, 201);
+        }
+
+        return response('No Huds', 403);        
+    }
+
     public function getHudData($id)
     {
         $hud = Hud::find($id);

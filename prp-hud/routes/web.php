@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix'=>'api'], function () use ($router) {
+    $router->get('hud', ['uses' => 'HudController@getHuds']);
     $router->get('hud/{id}', ['uses' => 'HudController@getHudData']);
     $router->post('hud', ['uses' => 'HudController@create']);
     $router->delete('hud/{id}', ['uses' => 'HudController@delete']);
