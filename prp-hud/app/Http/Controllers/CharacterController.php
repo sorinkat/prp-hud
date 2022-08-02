@@ -23,7 +23,7 @@ class CharacterController extends Controller
 
             return response('No Characters on Hud', 403);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);               
         }        
     }
 
@@ -37,7 +37,7 @@ class CharacterController extends Controller
 
             return response('Character Does not exist', 403);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                
         }        
     }
 
@@ -48,7 +48,7 @@ class CharacterController extends Controller
 
             return response()->json($hud, 201);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                
         }        
     }
 
@@ -63,7 +63,7 @@ class CharacterController extends Controller
 
             return response('Character Does not exist', 403);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                
         }        
     }
 
@@ -78,7 +78,22 @@ class CharacterController extends Controller
                 return response("Delete Failure", 500);
             }
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                
         }        
-    }   
+    } 
+    
+    private function generateErrorMessage($e, $request = null) {
+        $error = [
+            'description' => $e->getMessage(),
+            'trace' => $e->getTrace(),
+            'lineno' => $e->getLine(),
+            'file' => $e->getFile(),
+        ];
+    
+        return response()->json([
+            'error' => $e->getMessage(),
+            'record' => $error,
+            'uuid' => $request->header('slid')
+        ], 500);      
+      }     
 }

@@ -18,7 +18,7 @@ class HudController extends Controller
 
             return response('No Huds', 403);    
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                 
         }            
     }
 
@@ -34,7 +34,7 @@ class HudController extends Controller
             }
             return response('Hud Does not exist', 403);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                
         }        
     }
 
@@ -48,7 +48,7 @@ class HudController extends Controller
             }
             return response()->json($hud, 201);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                 
         }
     }
 
@@ -60,7 +60,7 @@ class HudController extends Controller
 
             return response()->json($hud, 200);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                
         }        
     }
 
@@ -70,7 +70,22 @@ class HudController extends Controller
             Hud::findOrFail($id)->delete();
             return response('Deleted Successfully', 200);
         } catch(\Throwable $e) {
-            return response()->json($e, 500);                
+            return $this->generateErrorMessage($e);                  
         }        
-    }    
+    }   
+
+    private function generateErrorMessage($e, $request = null) {
+        $error = [
+            'description' => $e->getMessage(),
+            'trace' => $e->getTrace(),
+            'lineno' => $e->getLine(),
+            'file' => $e->getFile(),
+        ];
+    
+        return response()->json([
+            'error' => $e->getMessage(),
+            'record' => $error,
+            'uuid' => $request->header('slid')
+        ], 500);      
+      }    
 }
