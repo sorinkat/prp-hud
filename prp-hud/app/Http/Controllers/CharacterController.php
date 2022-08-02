@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class CharacterController extends Controller
 {
+
+    public function getCharacters($id)
+    {
+        $characters = Character::where('hudid', $id)->all();
+        if(!empty($characters))
+        {
+            return response()->json($characters, 201);
+        }
+
+        return response('No Characters on Hud', 403);
+    }
+
     public function getCharacterData($id, $name)
     {        
         $character = Character::where('hudid', $id)->where('name',$name)->first();
@@ -14,7 +26,7 @@ class CharacterController extends Controller
             return response()->json($character, 201);
         }
 
-        return response('Character Does not exist', 500);
+        return response('Character Does not exist', 403);
     }
 
     public function create(Request $request)
@@ -32,7 +44,7 @@ class CharacterController extends Controller
             return response()->json($character, 200);
         }
 
-        return response('Character Does not exist', 500);
+        return response('Character Does not exist', 403);
     }
 
     public function delete($id, $name)

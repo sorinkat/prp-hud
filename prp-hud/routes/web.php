@@ -23,6 +23,7 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->delete('hud/{id}', ['uses' => 'HudController@delete']);
     $router->put('hud/{id}', ['uses' => 'HudController@update']);    
 
+    $router->get('character/{id}', ['uses' => 'CharacterController@getCharacters']);
     $router->get('character/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
     $router->post('character', ['uses' => 'CharacterController@create']);
     $router->delete('character/{id}/{name}', ['uses' => 'CharacterController@delete']);
