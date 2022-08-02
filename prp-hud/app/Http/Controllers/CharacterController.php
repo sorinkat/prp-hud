@@ -16,7 +16,7 @@ class CharacterController extends Controller
             {
                 $namelist['name'] = [];
                 foreach($characters as $ch) {
-                    $namelist['names'] = $ch->name;
+                    $namelist['name'][] = $ch->name;
                 }
                 $namelist['key'] = 'getcharacters';
                 return response()->json($namelist, 201);
