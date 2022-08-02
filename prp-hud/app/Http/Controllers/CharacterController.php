@@ -82,7 +82,7 @@ class CharacterController extends Controller
         }        
     } 
     
-    private function generateErrorMessage($e, $request = null) {
+    private function generateErrorMessage($e) {
         $error = [
             'description' => $e->getMessage(),
             'trace' => $e->getTrace(),
@@ -93,7 +93,6 @@ class CharacterController extends Controller
         return response()->json([
             'error' => $e->getMessage(),
             'record' => $error,
-            'uuid' => $request->header('slid')
         ], 500);      
       }     
 }
