@@ -13,7 +13,11 @@ class CharacterController extends Controller
         $characters = Character::where('hudid', $id)->get();
         if(!$characters->isEmpty())
         {
-            return response()->json($characters, 201);
+            $namelist = [];
+            foreach($characters as $ch) {
+                $namelist[] = $ch->name;
+            }
+            return response()->json($namelist, 201);
         }
 
         return response('No Characters on Hud', 403);
