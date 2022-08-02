@@ -14,10 +14,11 @@ class CharacterController extends Controller
             $characters = Character::where('hudid', $id)->get();
             if(!$characters->isEmpty())
             {
-                $namelist = [];
+                $namelist['name'] = [];
                 foreach($characters as $ch) {
-                    $namelist[] = $ch->name;
+                    $namelist['names'] = $ch->name;
                 }
+                $namelist['key'] = 'getcharacters';
                 return response()->json($namelist, 201);
             }
 
@@ -32,6 +33,7 @@ class CharacterController extends Controller
         try {
             $character = Character::where('hudid', $id)->where('name',$name)->first();
             if(!empty($character)) {
+                $character['key'] = 'getcharacter';
                 return response()->json($character, 201);
             }
 
