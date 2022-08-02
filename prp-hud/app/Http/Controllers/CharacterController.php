@@ -11,7 +11,7 @@ class CharacterController extends Controller
     public function getCharacters($id)
     {
         $characters = Character::where('hudid', $id)->get();
-        if(!empty($characters))
+        if(!$characters->isEmpty())
         {
             return response()->json($characters, 201);
         }
