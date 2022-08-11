@@ -48,7 +48,7 @@ class CharacterController extends Controller
         try {
             $result = json_decode($request->getContent());
             $character = Character::where('hudid', $result->hudid)->where('name',$result->name)->first();
-            if(!empty($character)) {
+            if(empty($character)) {
                 $character = Character::create($request->all());
             }
 
