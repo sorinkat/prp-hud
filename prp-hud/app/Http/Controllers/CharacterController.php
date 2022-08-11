@@ -46,9 +46,13 @@ class CharacterController extends Controller
     public function create(Request $request)
     {
         try {
-            $hud = Character::create($request->all());
+            $result = json_decode($request->getContent());
+            $character = Character::where('hudid', $result->hudid)->where('name',$result->name)->first();
+            if(!empty($character)) {
+                $character = Character::create($request->all());
+            }
 
-            return response()->json($hud, 201);
+            return response()->json($character, 201);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
         }        
