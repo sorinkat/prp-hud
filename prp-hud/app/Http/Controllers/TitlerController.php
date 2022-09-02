@@ -11,7 +11,7 @@ class TitlerController extends Controller
     public function changeState($cid, $hud, Request $request) {
         try {
             $titlers = Titler::where('character', $cid);
-            $titlers->update('active', 0);
+            $titlers->update(['active' => 0]);
             return response()->json($titlers, 200);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
