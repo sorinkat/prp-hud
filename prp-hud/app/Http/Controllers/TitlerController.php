@@ -20,8 +20,8 @@ class TitlerController extends Controller
                 $titler->update(['active' => 1]);
             } 
 
-            $titlers = Titler::where('character', $cid)->get();
-            return response()->json($titlers, 200);
+            $titlerreturn = Titler::where('character', $cid)->get();
+            return response()->json($titlerreturn, 200);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
         }
