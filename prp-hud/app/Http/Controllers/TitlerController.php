@@ -11,7 +11,7 @@ class TitlerController extends Controller
     public function changeState($cid, $hud, Request $request) {
         try {
             $titlers = Titler::where('character', $cid);
-            if(!empty($titler)) {
+            if(!empty($titlers)) {
                 $titlers->update(['active' => 0]);
             }
             
