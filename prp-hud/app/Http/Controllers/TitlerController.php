@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Titler;
+use App\Character;
 use Illuminate\Http\Request;
 
 class TitlerController extends Controller
 {
+    public function changeState($cid, $hud, Request $request) {
+        try {
+            $titlers = Titler::where('character', $cid)->get();
+            $titlers->update('active', 0);
+            return response()->json($titlers, 200);
+        } catch(\Throwable $e) {
+            return $this->generateErrorMessage($e);                
+        }
+    }
+
     public function create(Request $request) {
         try {
             $result = json_decode($request->getContent());
             $titler = Titler::where('character', $result->character)->where('title',$result->title)->first();
             if(empty($titler)) {
-                $character = Titler::create($request->all());
+                $titler = Titler::create($request->all());
             }
 
             return response()->json($titler, 201);
