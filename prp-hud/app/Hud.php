@@ -15,5 +15,13 @@ class Hud extends Model
         'id', 'account', 'active','active_character'
     ];
 
+    protected $appends = ['characterdata'];
+
     protected $hidden = [];
+
+    public function getCharacterDataAttribute()
+    {
+        $profile = $this->hasOne(Character::class,'id','active_character')->first();  
+        return $profile;
+    }
 }
