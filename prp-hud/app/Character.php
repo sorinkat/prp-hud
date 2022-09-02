@@ -17,7 +17,7 @@ class Character extends Model
 
     public function getTitlersAttribute()
     {
-        $titlers = $this->hasMany(Titler::class,'id','character')->get();  
+        $titlers = $this->hasMany(Titler::class,'character','id')->get();  
         return $titlers;
     }
 
