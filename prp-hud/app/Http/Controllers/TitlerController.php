@@ -27,6 +27,20 @@ class TitlerController extends Controller
         }
     }
 
+    public function get($cid) {
+        try {
+            $titler = Titler::where('character', $cid)->where('active', 1)->get();
+            if(!$titler->isEmpty())
+            {
+                return response()->json($titler, 201);
+            }
+
+            return response('No Active Titler', 403);
+        } catch(\Throwable $e) {
+            return $this->generateErrorMessage($e);               
+        } 
+    }
+
     public function create(Request $request) {
         try {
             $result = json_decode($request->getContent());
