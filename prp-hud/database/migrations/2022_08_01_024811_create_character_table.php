@@ -21,6 +21,7 @@ class CreateCharacterTable extends Migration
             $table->string('combatanimations')->nullable();
             $table->string('socialanimations')->nullable();
             $table->string('rpanimations')->nullable();
+            $table->integer('titler_active')->default(0);
             $table->timestamps();
         });
     }

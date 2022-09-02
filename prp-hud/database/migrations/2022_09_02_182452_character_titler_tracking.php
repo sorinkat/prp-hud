@@ -20,7 +20,8 @@ class CharacterTitlerTracking extends Migration
             $table->string('text');            
             $table->boolean('active');            
             $table->timestamps();
-        });      
+        });
+  
     }
 
     /**
