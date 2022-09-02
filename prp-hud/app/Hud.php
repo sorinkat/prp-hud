@@ -12,7 +12,7 @@ class Hud extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'account', 'active'
+        'id', 'account', 'active','active_character'
     ];
 
     protected $hidden = [];
