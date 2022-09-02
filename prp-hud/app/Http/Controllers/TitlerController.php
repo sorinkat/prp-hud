@@ -18,10 +18,10 @@ class TitlerController extends Controller
             if($hud != 0) {
                 $titler = Titler::where('id', $hud);
                 $titler->update(['active' => 1]);
-            } else {
-                $titler = [];
-            }
-            return response()->json($titler, 200);
+            } 
+
+            $titlers = Titler::where('character', $cid)->get();
+            return response()->json($titlers, 200);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
         }
