@@ -26,6 +26,7 @@ class HudController extends Controller
     {
         try {
             $hud = Hud::find($id);
+            $hud['key'] = 'gethud';
             if(!empty($hud) && $hud->active == 1) {
                 return response()->json($hud, 201);
             }
