@@ -1,0 +1,22 @@
+default
+{
+    state_entry() 
+    {
+        llOwnerSay("Loading?");  
+        state main;
+    }
+
+    attach(key id)
+    {
+        llResetScript();
+    }
+}
+
+state main
+{
+    state_entry()
+    {
+        llOwnerSay("Loaded");
+    }
+
+}

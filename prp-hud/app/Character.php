@@ -12,5 +12,14 @@ class Character extends Model
         'hudid', 'name', 'commandchannel','combatanimations','socialanimations','rpanimations'
     ];
 
+    protected $appends = ['titlers'];
+
+
+    public function getTitlersAttribute()
+    {
+        $titlers = $this->hasMany(Titler::class,'character','id');  
+        return $titlers;
+    }
+
     protected $hidden = [];
 }
