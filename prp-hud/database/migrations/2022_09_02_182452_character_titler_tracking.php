@@ -14,13 +14,12 @@ class CharacterTitlerTracking extends Migration
     public function up()
     {
         Schema::create('titler', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->increments('id');
             $table->integer('character');
             $table->string('title');
             $table->string('text');            
             $table->boolean('active');            
             $table->timestamps();
-            $table->index('id');
         });
 
         Schema::table('character', function (Blueprint $table) {
