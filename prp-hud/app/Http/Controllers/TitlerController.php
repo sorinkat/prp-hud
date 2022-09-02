@@ -15,7 +15,7 @@ class TitlerController extends Controller
                 $character = Titler::create($request->all());
             }
 
-            return response()->json($character, 201);
+            return response()->json($titler, 201);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
         }
