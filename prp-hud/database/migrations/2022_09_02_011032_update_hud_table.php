@@ -14,7 +14,7 @@ class UpdateHudTable extends Migration
     public function up()
     {
         Schema::table('hud', function (Blueprint $table) {
-            $table->integer('active_character')->nullable();
+            $table->integer('active_character')->default(0);
         });
     }
 
