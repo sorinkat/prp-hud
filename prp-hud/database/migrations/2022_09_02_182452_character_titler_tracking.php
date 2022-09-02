@@ -20,11 +20,7 @@ class CharacterTitlerTracking extends Migration
             $table->string('text');            
             $table->boolean('active');            
             $table->timestamps();
-        });
-
-        Schema::table('character', function (Blueprint $table) {
-            $table->integer('titler_active')->default(0);
-        });        
+        });      
     }
 
     /**
