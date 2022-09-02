@@ -32,6 +32,7 @@ class TitlerController extends Controller
             $titler = Titler::where('character', $cid)->where('active', 1)->get();
             if(!$titler->isEmpty())
             {
+                $titler['key'] = 'gettitler';
                 return response()->json($titler, 201);
             }
 
