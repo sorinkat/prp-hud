@@ -47,7 +47,7 @@ class CharacterController extends Controller
         try {
             $character = Character::where('id', $cid)->first();
             if(!empty($character)) {
-                $character->update(['titler_active'=>1]);
+                $character->update(["titler_active"=>1]);
                 return response()->json($character, 200);
             }
 
@@ -61,7 +61,7 @@ class CharacterController extends Controller
         try {
             $character = Character::where('id', $cid)->first();
             if(!empty($character)) {
-                $character->update(['titler_active'=>0]);
+                $character->update(["titler_active"=>0]);
                 return response()->json($character, 200);
             }
 
