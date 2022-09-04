@@ -38,7 +38,7 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->put('titler/{id}', ['uses' => 'TitlerController@update']);
 
     // Enables the selected hud and disables all others.  Pass in 0 to disable all huds for character.
-    $router->put('titler/{cid}/enable', ['uses' => 'TitlerController@changeState']);  
+    $router->put('titler/{cid}/enable', ['uses' => 'CharacterController@changeState']);  
     $router->put('titler/{cid}/disable', ['uses' => 'CharacterController@enableTitler']);    
     $router->put('titler/{cid}/{hud}', ['uses' => 'CharacterController@disableTitler']);
            
