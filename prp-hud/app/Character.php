@@ -9,7 +9,7 @@ class Character extends Model
     protected $table = 'character';
 
     protected $fillable = [
-        'hudid', 'name', 'commandchannel','combatanimations','socialanimations','rpanimations'
+        'hudid', 'name', 'commandchannel','combatanimations','socialanimations','rpanimations','titler_active'
     ];
 
     protected $appends = ['titlers','activetitler'];
