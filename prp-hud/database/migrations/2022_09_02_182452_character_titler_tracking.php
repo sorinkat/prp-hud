@@ -18,7 +18,7 @@ class CharacterTitlerTracking extends Migration
             $table->integer('character');
             $table->string('title');
             $table->string('text');            
-            $table->boolean('active');            
+            $table->integer('active')->default(0);          
             $table->timestamps();
         });
   

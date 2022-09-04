@@ -43,6 +43,9 @@ list CombatAnimations; // Animation Lists
 list SocialAnimations; // Animation Lists
 list RPAnimations; // Animation Lists
 list Characters; // The Characters available.
+string CharacterData;
+list Titlers;
+string Titler;
 string CharacterName;
 
 // Animation Vars
@@ -65,6 +68,7 @@ integer titlerOn = 0;
 // System Functions
 init()
 {
+    // Set Data and prep
     owner = llGetOwner();
     channelDialog  = (integer)("0xF" + llGetSubString(llGetOwner(),0,6));
     channelDialog_newCharacter  = (integer)("0xF" + llGetSubString(llGetOwner(),0,6)) + 1;
@@ -394,6 +398,11 @@ processConfiguration(string data)
     SocialAnimations = llCSV2List(llJsonGetValue(data,["socialanimations"]));
     RPAnimations = llCSV2List(llJsonGetValue(data,["rpanimations"]));
     CommandChannel =  (integer)llJsonGetValue(data,["commandchannel"]);
+    CharacterData = data;
+    Titlers = llJson2List(llJsonGetValue(data,["titlers"]));
+    activeTitler = llJsonGetValue(data,["titler"]);
+    //llOwnerSay(data);
+    //llOwnerSay(llDumpList2String(Titlers,"\n"));
     llOwnerSay("Chat Command Channel set to: " + (string)CommandChannel);
     llListen(CommandChannel,"",owner,""); 
 }
@@ -658,18 +667,29 @@ state main
                 else  if(message == "Titlers")
                 {
                     integer titlerCount = 0;
-                    list Titlers = [];
-                    Titlers += ["New Titler"];
-                    // List all the characters titlers here with * Next to the acive one.
+                    list TitlersButtons = [];
+                    TitlersButtons += ["New Titler"];                   
 
-                    if(titlerCount > 0) {
+                    integer titlerLength = llGetListLength(Titlers);
+                    if(titlerLength > 0) {
+                        integer i = 0;
+                        while(i < titlerLength) {
+                            llOwnerSay(llList2String(Titlers, i));
+                            if((integer)llJsonGetValue(llList2String(Titlers, i),["active"]) == true) {
+                                TitlersButtons += "* " + llJsonGetValue(llList2String(Titlers, i),["title"]);
+                            } else {
+                                TitlersButtons += llJsonGetValue(llList2String(Titlers, i),["title"]);
+                            }
+                            i++;
+                        }
+
                         if(titlerOn == 0) {
-                            Titlers += ["Enable"];
+                            TitlersButtons += ["Enable"];
                         } else {
-                            Titlers += ["Disable"];
+                            TitlersButtons += ["Disable"];
                         }            
                     }
-                    llDialog(owner, "Choose Titler", Titlers, channelDialog);
+                    llDialog(owner, "Choose Titler", TitlersButtons, channelDialog);
                 } 
                 else if(message == "Enable")
                 {

@@ -16,7 +16,7 @@ class CreateHudTable extends Migration
         Schema::create('hud', function (Blueprint $table) {
             $table->string('id')->unique();
             $table->string('account');
-            $table->boolean('active');
+            $table->integer('active')->default(1);
             $table->timestamps();
             $table->index('id');
         });
