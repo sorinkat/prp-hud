@@ -43,7 +43,8 @@ class CharacterController extends Controller
         }        
     }
 
-    public function enableTitler($cid) {
+    public function enableTitler($cid) 
+    {
         try {
             $character = Character::where('id', $cid)->first();
             if(!empty($character)) {
@@ -56,7 +57,8 @@ class CharacterController extends Controller
         }
     }
 
-    public function disableTitler($cid) {
+    public function disableTitler($cid) 
+    {
         try {
             $character = Character::where('id', $cid)->first();
             if(!empty($character)) {
