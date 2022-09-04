@@ -43,6 +43,34 @@ class CharacterController extends Controller
         }        
     }
 
+    public function enableTitler($cid) {
+        try {
+            $character = Character::where('id', $cid)->first();
+            if(!empty($character)) {
+                $character->update(['titler_active'=>1]);
+                return response()->json($character, 200);
+            }
+
+            return response('Character Does not exist', 403);
+        } catch(\Throwable $e) {
+            return $this->generateErrorMessage($e);                
+        }
+    }
+
+    public function disableTitler($cid) {
+        try {
+            $character = Character::where('id', $cid)->first();
+            if(!empty($character)) {
+                $character->update(['titler_active'=>0]);
+                return response()->json($character, 200);
+            }
+
+            return response('Character Does not exist', 403);
+        } catch(\Throwable $e) {
+            return $this->generateErrorMessage($e);                
+        }        
+    }    
+
     public function create(Request $request)
     {
         try {
