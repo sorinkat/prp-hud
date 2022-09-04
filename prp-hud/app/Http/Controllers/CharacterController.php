@@ -48,7 +48,7 @@ class CharacterController extends Controller
             $character = Character::where('id', $cid)->first();
             if(!empty($character)) {
                 $character->update(["titler_active"=>1]);
-                return response()->json($character, 200);
+                return response()->json("Success", 200);
             }
 
             return response('Character Does not exist', 403);
@@ -62,7 +62,7 @@ class CharacterController extends Controller
             $character = Character::where('id', $cid)->first();
             if(!empty($character)) {
                 $character->update(["titler_active"=>0]);
-                return response()->json($character, 200);
+                return response()->json("Success", 200);
             }
 
             return response('Character Does not exist', 403);
