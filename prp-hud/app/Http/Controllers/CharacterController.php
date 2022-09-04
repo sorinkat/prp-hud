@@ -50,7 +50,6 @@ class CharacterController extends Controller
                 $character->update(["titler_active"=>1]);
                 return response()->json("Success", 200);
             }
-
             return response('Character Does not exist', 403);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
@@ -64,7 +63,6 @@ class CharacterController extends Controller
                 $character->update(["titler_active"=>0]);
                 return response()->json("Success", 200);
             }
-
             return response('Character Does not exist', 403);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);                
