@@ -39,6 +39,17 @@ class HudController extends Controller
         }        
     }
 
+    public function setActiveCharacter($id,$cid) {
+        try {
+            $hud = Hud::findOrFail($id);
+            $hud->update(["active_character", $cid]);
+
+            return response()->json($hud, 200);
+        } catch(\Throwable $e) {
+            return $this->generateErrorMessage($e);  
+        }
+    }
+
     public function create(Request $request)
     {
         try {
