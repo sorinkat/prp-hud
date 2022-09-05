@@ -27,7 +27,7 @@ class Hud extends Model
 
     public function getCharactersAttribute()
     {
-        $characters = $this->hadMany(Character::class,'hudid','id')->get();
+        $characters = $this->hasMany(Character::class,'hudid','id')->get();
         return $characters;
     }
 }
