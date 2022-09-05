@@ -24,11 +24,13 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->delete('hud/{id}', ['uses' => 'HudController@delete']);
     $router->put('hud/{id}', ['uses' => 'HudController@update']);    
 
+    $router->put('character/setactive/{id}/{cid}', ['uses' => 'HudController@setActiveCharacter']);
     $router->get('character/{id}', ['uses' => 'CharacterController@getCharacters']);
     $router->get('character/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
     $router->post('character', ['uses' => 'CharacterController@create']);
     $router->delete('character/{id}/{name}', ['uses' => 'CharacterController@delete']);
-    $router->put('character/{id}/{name}', ['uses' => 'CharacterController@update']); 
+    $router->put('character/{id}/{name}', ['uses' => 'CharacterController@update']);
+
     
     //$router->get('titler/{id}', ['uses' => 'CharacterController@getCharacters']);
     //$router->get('titler/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
