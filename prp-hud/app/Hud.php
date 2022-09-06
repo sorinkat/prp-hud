@@ -15,10 +15,11 @@ class Hud extends Model
         'id', 'account', 'active','active_character'
     ];
 
-    protected $appends = ['characterdata','characters'];
+    //protected $appends = ['characterdata','characters'];
 
     protected $hidden = [];
 
+    /*
     public function getCharacterDataAttribute()
     {
         $profile = $this->hasOne(Character::class,'id','active_character')->first();  
@@ -30,4 +31,5 @@ class Hud extends Model
         $characters = $this->hasMany(Character::class,'hudid','id')->get();
         return $characters;
     }
+    */
 }
