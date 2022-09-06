@@ -28,6 +28,7 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->get('character/active/{id}', ['uses' => 'CharacterController@getActiveCharacter']);
     $router->get('character/{id}', ['uses' => 'CharacterController@getCharacters']);
     $router->get('character/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
+    
     $router->post('character', ['uses' => 'CharacterController@create']);
     $router->delete('character/{id}/{name}', ['uses' => 'CharacterController@delete']);
     $router->put('character/{id}/{name}', ['uses' => 'CharacterController@update']);

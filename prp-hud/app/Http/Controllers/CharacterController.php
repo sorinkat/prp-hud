@@ -47,12 +47,11 @@ class CharacterController extends Controller
     {
         try {
             $character = Character::where('id', $id)->first();
+            $character['key'] = 'getactivecharacter'; 
             if(!empty($character)) {   
                             
                 return response()->json($character, 201);
             }
-            $character['key'] = 'getactivecharacter'; 
-            
 
             return response()->json($character, 403);
         } catch(\Throwable $e) {
