@@ -43,6 +43,23 @@ class CharacterController extends Controller
         }        
     }
 
+    public function getActiveCharacter($id) 
+    {
+        try {
+            $character = Character::where('id', $id)->first();
+            if(!empty($character)) {   
+                            
+                return response()->json($character, 201);
+            }
+            $character['key'] = 'getactivecharacter'; 
+            
+
+            return response()->json($character, 403);
+        } catch(\Throwable $e) {
+            return $this->generateErrorMessage($e);                
+        }         
+    }
+
     public function enableTitler($cid) 
     {
         try {

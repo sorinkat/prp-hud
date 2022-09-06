@@ -25,6 +25,7 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->put('hud/{id}', ['uses' => 'HudController@update']);    
 
     $router->put('character/setactive/{id}/{cid}', ['uses' => 'HudController@setActiveCharacter']);
+    $router->get('character/active/{id}', ['uses' => 'CharacterController@getActiveCharacter']);
     $router->get('character/{id}', ['uses' => 'CharacterController@getCharacters']);
     $router->get('character/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
     $router->post('character', ['uses' => 'CharacterController@create']);
