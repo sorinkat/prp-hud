@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Character;
+use App\Hud;
 use Illuminate\Http\Request;
 
 class CharacterController extends Controller
@@ -117,12 +118,13 @@ class CharacterController extends Controller
         }        
     }
 
-    public function delete($id, $name)
+    public function delete($id, $cid)
     {
         try {
-            $name = urldecode($name);
-            $result = Character::where('hudid', $id)->where('name',$name)->delete();
+            $result = Character::where('hudid', $id)->where('id',$cid)->delete();
+
             if($result) {
+                Hud::where('id', $id)->first()->update(['active_character'=>0]);
                 return response("Deleated", 200);
             } else {
                 return response("Delete Failure", 500);
