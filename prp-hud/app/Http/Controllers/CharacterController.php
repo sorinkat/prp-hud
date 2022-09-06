@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Character;
 use App\Hud;
+use App\Titler;
 use Illuminate\Http\Request;
 
 class CharacterController extends Controller
@@ -125,10 +126,14 @@ class CharacterController extends Controller
 
             if($result) {
                 $hud = Hud::where('id', $id)->first();
+                // Check if the users hud has this character as active.
                 if($hud->active_character == $cid) 
                 {
                     $hud->update(['active_character'=>0]);
                 }
+                // Check if the character has and titlers.
+                $titlers = Titler::where('character',$cid)->get();
+                $titlers->delete();
                 return response("Deleated", 200);
             } else {
                 return response("Delete Failure", 500);
