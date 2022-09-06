@@ -32,9 +32,6 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->delete('character/{id}/{name}', ['uses' => 'CharacterController@delete']);
     $router->put('character/{id}/{name}', ['uses' => 'CharacterController@update']);
 
-    
-    //$router->get('titler/{id}', ['uses' => 'CharacterController@getCharacters']);
-    //$router->get('titler/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
     $router->get('titler/{cid}', ['uses' => 'TitlerController@get']);
     $router->post('titler', ['uses' => 'TitlerController@create']);
     $router->delete('titler/{id}', ['uses' => 'TitlerController@delete']);
@@ -43,7 +40,5 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     // Enables the selected hud and disables all others.  Pass in 0 to disable all huds for character.
     $router->put('titler/{cid}/enable', ['uses' => 'CharacterController@enableTitler']);    
     $router->put('titler/{cid}/disable', ['uses' => 'CharacterController@disableTitler']);
-    $router->put('titler/{cid}/{hud}', ['uses' => 'TitlerController@changeState']);  
-
-           
+    $router->put('titler/{cid}/{hud}', ['uses' => 'TitlerController@changeState']);           
 }); 
