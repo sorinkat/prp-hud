@@ -29,14 +29,13 @@ class TitlerController extends Controller
 
     public function get($cid) {
         try {
-            $titler = Titler::where('character', $cid)->where('active', 1)->get();
+            $titler['list'] = Titler::where('character', $cid)->where('active', 1)->get();
             $titler['key'] = 'gettitler';
-            if(!$titler->isEmpty()) {
-                
+            if(!empty($titler)) {                
                 return response()->json($titler, 201);
             }
 
-            return response('No Active Titler', 403);
+            return response()->json($titler, 403);
         } catch(\Throwable $e) {
             return $this->generateErrorMessage($e);               
         } 
