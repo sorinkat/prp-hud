@@ -57,6 +57,7 @@ class HudController extends Controller
             $hud = Hud::find($result->id);
             if(empty($hud)) {
                 $hud = Hud::create($request->all());
+                $hud['key'] = 'gethud';
             }
             return response()->json($hud, 201);
         } catch(\Throwable $e) {
