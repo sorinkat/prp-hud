@@ -30,7 +30,7 @@ $router->group(['prefix'=>'api'], function () use ($router) {
     $router->get('character/{id}/{name}', ['uses' => 'CharacterController@getCharacterData']);
     
     $router->post('character', ['uses' => 'CharacterController@create']);
-    $router->delete('character/{id}/{name}', ['uses' => 'CharacterController@delete']);
+    $router->delete('character/{id}/{cid}', ['uses' => 'CharacterController@delete']);
     $router->put('character/{id}/{name}', ['uses' => 'CharacterController@update']);
 
     $router->get('titler/{cid}', ['uses' => 'TitlerController@get']);

@@ -123,17 +123,9 @@ class CharacterController extends Controller
     {
         try {
             $result = Character::where('hudid', $id)->where('id',$cid)->delete();
-
             if($result) {
-                $hud = Hud::where('id', $id)->first();
-                // Check if the users hud has this character as active.
-                if($hud->active_character == $cid) 
-                {
-                    $hud->update(['active_character'=>0]);
-                }
-                // Check if the character has and titlers.
-                $titlers = Titler::where('character',$cid)->get();
-                $titlers->delete();
+                Hud::where('id', $id)->where('active_character',$cid)->update(['active_character'=>0]);
+                Titler::where('character',$cid)->delete();
                 return response("Deleated", 200);
             } else {
                 return response("Delete Failure", 500);
