@@ -124,7 +124,11 @@ class CharacterController extends Controller
             $result = Character::where('hudid', $id)->where('id',$cid)->delete();
 
             if($result) {
-                Hud::where('id', $id)->first()->update(['active_character'=>0]);
+                $hud = Hud::where('id', $id)->first();
+                if($hud->active_character == $cid) 
+                {
+                    $hud->update(['active_character'=>0]);
+                }
                 return response("Deleated", 200);
             } else {
                 return response("Delete Failure", 500);
