@@ -17,8 +17,10 @@ class CharacterController extends Controller
             if(!$characters->isEmpty())
             {
                 $namelist['name'] = [];
+                $namelist['characters'] = [];
                 foreach($characters as $ch) {
                     $namelist['name'][] = $ch->name;
+                    $namelist['characters'][] = $ch;
                 }
                 $namelist['key'] = 'getcharacters';
                 return response()->json($namelist, 201);
