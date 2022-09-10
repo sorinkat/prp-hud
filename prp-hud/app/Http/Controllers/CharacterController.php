@@ -106,10 +106,10 @@ class CharacterController extends Controller
         }        
     }
 
-    public function update($id, $name, Request $request)
+    public function update($id, $cid, Request $request)
     {
         try {
-            $character = Character::where('hudid', $id)->where('name',$name)->first();
+            $character = Character::where('hudid', $id)->where('id',$cid)->first();
             if(!empty($character)) {
                 $character->update($request->all());
                 return response()->json($character, 200);
